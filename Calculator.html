@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #432659;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      background: #a787c0;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #906f97;
+    }
+
+    #display {
+      width: 91%;
+      padding: 15px;
+      font-size: 24px;
+      margin-bottom: 5px;
+      border: none;
+      border-radius: 10px;
+      text-align: right;
+      background: #dba9e4;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 20px;
+      font-size: 18px;
+      background: #cfc4d3;
+      color: rgb(143, 118, 118);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #df9ae7;
+    }
+
+    .operator {
+      background: #a56ab6;
+    }
+
+    .equal {
+      grid-column: span 4;
+      background: #81478e;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly />
+    <div class="buttons">
+      <button class="btn" data-value="7">7</button>
+      <button class="btn" data-value="8">8</button>
+      <button class="btn" data-value="9">9</button>
+      <button class="btn operator" data-value="/">÷</button>
+
+      <button class="btn" data-value="4">4</button>
+      <button class="btn" data-value="5">5</button>
+      <button class="btn" data-value="6">6</button>
+      <button class="btn operator" data-value="*">×</button>
+
+      <button class="btn" data-value="1">1</button>
+      <button class="btn" data-value="2">2</button>
+      <button class="btn" data-value="3">3</button>
+      <button class="btn operator" data-value="-">−</button>
+
+      <button class="btn" data-value="0">0</button>
+      <button class="btn" data-value=".">.</button>
+      <button class="btn" id="clear">C</button>
+      <button class="btn operator" data-value="+">+</button>
+
+      <button class="btn equal" id="equals">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll(".btn");
+    let expression = "";
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.value;
+
+        if (value) {
+          expression += value;
+          display.value = expression;
+        }
+
+        if (button.id === "clear") {
+          expression = "";
+          display.value = "";
+        }
+
+        if (button.id === "equals") {
+          try {
+            expression = eval(expression).toString();
+            display.value = expression;
+          } catch (error) {
+            display.value = "Error";
+            expression = "";
+          }
+        }
+      });
+    });
+
+    // Keyboard input handling
+    document.addEventListener("keydown", (e) => {
+      if ((e.key >= 0 && e.key <= 9) || "+-*/.".includes(e.key)) {
+        expression += e.key;
+        display.value = expression;
+      }
+
+      if (e.key === "Enter") {
+        try {
+          expression = eval(expression).toString();
+          display.value = expression;
+        } catch {
+          display.value = "Error";
+          expression = "";
+        }
+      }
+
+      if (e.key === "Backspace") {
+        expression = expression.slice(0, -1);
+        display.value = expression;
+      }
+
+      if (e.key.toLowerCase() === "c") {
+        expression = "";
+        display.value = "";
+      }
+    });
+  </script>
+</body>
+</html>
