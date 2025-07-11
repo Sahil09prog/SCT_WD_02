@@ -2,9 +2,13 @@
 
 Task Summary:
 
+Build a fully functional calculator to practice DOM manipulation, event handling, and basic arithmetic operation
+implement functions to handle input parsing, event listeners on equal button, error handling, keyboard input handling
 
-A fully responsive and interactive calculator built using HTML, CSS, and JavaScript. This application supports basic arithmetic operations—addition, subtraction, multiplication, and division—along with features like keyboard input handling, real-time display updates, and error prevention for invalid expressions. Designed with a clean user interface and modular styling to ensure accessibility and ease of use across devices.
-Key Features:
+----
+
+
+📘 Key Features:
 - Supports mouse and keyboard input
 - Clear, Delete, and Equals functions
 - Real-time evaluation and visual feedback
